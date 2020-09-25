@@ -11,10 +11,11 @@ import re
 import time
 
 HOMEPAGE_URL = "https://watch.lolesports.com/"
-LEC_VOD_URL = "https://watch.lolesports.com/vods/lec/lec-summer-2020"
-LCS_VOD_URL = "https://watch.lolesports.com/vods/lcs/lcs-summer-2020"
-LCK_VOD_URL = "https://watch.lolesports.com/vods/lck/lck-summer-2020"
-LPL_VOD_URL = "https://watch.lolesports.com/vods/lpl/lpl-summer-2020"
+WORLDS_VOD_URL = "https://lolesports.com/vods/worlds/worlds_2020"
+# LEC_VOD_URL = "https://watch.lolesports.com/vods/lec/lec-summer-2020"
+# LCS_VOD_URL = "https://watch.lolesports.com/vods/lcs/lcs-summer-2020"
+# LCK_VOD_URL = "https://watch.lolesports.com/vods/lck/lck-summer-2020"
+# LPL_VOD_URL = "https://watch.lolesports.com/vods/lpl/lpl-summer-2020"
 REGEX = r"vod/\d{18}/\d" # RegEx for URL pattern, e.g.: /vod/123456789012345678/1
 NUMBER_OF_GAMES = 15 # Set the number of games to watch
 
@@ -35,7 +36,7 @@ url_list = []
 
 # Wait until page is loaded before visiting the selected VOD url
 WebDriverWait(driver, 30).until(ec.visibility_of_element_located((By.ID, "riotbar-account")))
-driver.get(LEC_VOD_URL)
+driver.get(WORLDS_VOD_URL)
 
 # Populate VOD list with URL of unwatched games
 vod_urls = driver.find_elements_by_class_name("games")
