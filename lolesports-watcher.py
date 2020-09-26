@@ -18,7 +18,7 @@ WORLDS_VOD_URL = "https://lolesports.com/vods/worlds/worlds_2020"
 # LCK_VOD_URL = "https://watch.lolesports.com/vods/lck/lck-summer-2020"
 # LPL_VOD_URL = "https://watch.lolesports.com/vods/lpl/lpl-summer-2020"
 REGEX = r"vod/\d{18}/\d" # RegEx for URL pattern, e.g.: /vod/123456789012345678/1
-NUMBER_OF_GAMES = 1 # Set the number of games to watch
+NUMBER_OF_GAMES = 15 # Set the number of games to watch
 MUTE_AUDIO = True 
 
 # Open a Chrome browser window
@@ -26,9 +26,9 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 if MUTE_AUDIO:
     chrome_options.add_argument("--mute-audio")
-    print("\nOpening muted browser")
+    print("\nOpening muted browser\n")
 else:
-    print("\nOpening browser")
+    print("\nOpening browser\n")
 driver = webdriver.Chrome(options=chrome_options)
 driver.set_window_position(0, 0)
 driver.set_window_size(1050, 768)
@@ -59,7 +59,8 @@ for vod in vod_urls:
     else:
         vod_url = HOMEPAGE_URL + re.search(REGEX, innerHTML).group()
         url_list.append(vod_url)
-print("List of unwatched games obtained")
+url_list.reverse()
+print("List of unwatched games obtained\n")
 
 # Watch games and logout/quit after NUMBER_OF_GAMES
 watch_counter = 0
@@ -67,7 +68,7 @@ watch_time_in_minutes = 13 # Should watch long enough for it to count towards mi
 youtube_frame = '//iframe[starts-with(@src, "https://www.youtube.com/embed")]'
 for url in url_list:
     driver.get(url)
-    WebDriverWait(driver, 20).until(ec.visibility_of_element_located((By.XPATH, youtube_frame)))
+    time.sleep(10)
     driver.switch_to.frame(driver.find_element_by_xpath(youtube_frame))
     WebDriverWait(driver, 20).until(ec.element_to_be_clickable((By.XPATH, '//button[@aria-label="Play (k)"]'))).click()
     print("Now watching " + url)
@@ -75,10 +76,11 @@ for url in url_list:
     print("Done!\n")
     watch_counter += 1
     if watch_counter == NUMBER_OF_GAMES:
+        driver.switch_to.default_content()
         hover_element = driver.find_element_by_id("riotbar-account-bar")
         action = ActionChains(driver)
         action.move_to_element(hover_element).perform()
         driver.find_element_by_xpath("//*[@data-riotbar-account-action='logout']").click()
         driver.quit()
-        print(str(NUMBER_OF_GAMES) + "game(s) watched. Task completed.")
+        print(str(NUMBER_OF_GAMES) + "game(s) watched. Task completed.\n")
         break
