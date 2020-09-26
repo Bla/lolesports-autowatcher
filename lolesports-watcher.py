@@ -26,6 +26,9 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 if MUTE_AUDIO:
     chrome_options.add_argument("--mute-audio")
+    print("\nOpening muted browser")
+else:
+    print("\nOpening browser")
 driver = webdriver.Chrome(options=chrome_options)
 driver.set_window_position(0, 0)
 driver.set_window_size(1050, 768)
@@ -56,6 +59,7 @@ for vod in vod_urls:
     else:
         vod_url = HOMEPAGE_URL + re.search(REGEX, innerHTML).group()
         url_list.append(vod_url)
+print("List of unwatched games obtained")
 
 # Watch games and logout/quit after NUMBER_OF_GAMES
 watch_counter = 0
@@ -76,5 +80,5 @@ for url in url_list:
         action.move_to_element(hover_element).perform()
         driver.find_element_by_xpath("//*[@data-riotbar-account-action='logout']").click()
         driver.quit()
-        print(str(NUMBER_OF_GAMES) + "game(s) watched.")
+        print(str(NUMBER_OF_GAMES) + "game(s) watched. Task completed.")
         break
