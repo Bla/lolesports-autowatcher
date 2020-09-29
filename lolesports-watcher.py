@@ -26,7 +26,7 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
 if MUTE_AUDIO:
     chrome_options.add_argument("--mute-audio")
-    print("\nOpening muted browser\n")
+    print("\nOpening browser (muted)\n")
 else:
     print("\nOpening browser\n")
 driver = webdriver.Chrome(options=chrome_options)
@@ -82,5 +82,5 @@ for url in url_list:
         action.move_to_element(hover_element).perform()
         driver.find_element_by_xpath("//*[@data-riotbar-account-action='logout']").click()
         driver.quit()
-        print(str(NUMBER_OF_GAMES) + "game(s) watched. Task completed.\n")
+        print("Task completed: " + str(NUMBER_OF_GAMES) + " game(s) watched.\n")
         break
