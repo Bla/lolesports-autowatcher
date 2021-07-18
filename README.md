@@ -4,7 +4,7 @@ This script automatically rotates between unwatched LoL Esports games to help yo
 ## Getting Started
 ### Requirements:
 - Python 3
-- Selenium (`pip install selenium`)
+- Selenium/urllib3 (`pip install -r requirements.txt`)
 - Google Chrome WebDriver
   - Visit: https://sites.google.com/a/chromium.org/chromedriver/ 
   - Download the ChromeDriver with the same version number as your installed Google Chrome browser (most likely the latest stable release)
@@ -15,12 +15,11 @@ This script automatically rotates between unwatched LoL Esports games to help yo
 `driver = webdriver.Chrome()`
 - To change the number of games to watch, find the following line and change the value:  
 `NUMBER_OF_GAMES = 15`
-- The script will wait for 30 seconds at the login page. If you need more time to fill in your login details, find the following line and change the value:  
-`time.sleep(30)`
-- The script will watch games from the LEC league by default. If you want to watch a different league instead, find the following line and replace LEC_VOD_URL with your league of choice (other options: `LCS_VOD_URL`, `LCK_VOD_URL`, `LPL_VOD_URL`):  
-`driver.get(LEC_VOD_URL)`
 - The script will wait 13 minuntes before rotating to the next game. This should be more than enough for the game to count towards your missions. To change this, edit the following line:  
-`watch_time_in_minutes = 13`
+`WATCH_TIME_IN_MINUTES = 13`
+- The script will wait for 20 seconds at the login page. If you need more time to fill in your login details, find the following line and change the value:  
+`time.sleep(20)`
+- The script will watch games from the LEC region by default. If you want to watch a different league instead, replace `VOD_URL` with your region of choice.
 
 ## Running the script
 - Run `python lolesports-watcher.py`. _A new Chrome window be started and you will be redirected to the lolesports.com login page._
