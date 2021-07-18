@@ -15,7 +15,7 @@ import time
 HOMEPAGE_URL = "https://lolesports.com/"
 VOD_URL = "https://lolesports.com/vods/lec/lec_2021_summer"
 REGEX = r"vod/\d{18}/\d" # RegEx for URL pattern, e.g.: /vod/123456789012345678/1
-NUMBER_OF_GAMES = 15 # Set the number of games to watch
+NUMBER_OF_GAMES = 8 # Set the number of games to watch
 WATCH_TIME_IN_MINUTES = 13 # Should watch long enough for it to count towards missions
 MUTE_AUDIO = True
 
@@ -75,7 +75,7 @@ for i, url in enumerate(url_list):
     print("[{}/{}] Now watching {}".format(i + 1, NUMBER_OF_GAMES, url))
     for minute in range(WATCH_TIME_IN_MINUTES):
         time.sleep(60)
-        print("{}.. ".format(minute + 1), end="")
+        print("{}.. ".format(minute + 1), end="", flush=True)
     print("Done!\n")
     watch_counter += 1
     if watch_counter != NUMBER_OF_GAMES:
